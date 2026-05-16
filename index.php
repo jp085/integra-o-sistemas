@@ -13,8 +13,8 @@ try {
     @$UrlExplode[1];
     $response1 = @file_get_contents("https://brasilapi.com.br/api/cptec/v1/cidade/$UrlExplode[1]");
     $decode1 = json_decode($response1,    true);
-    /*$status = $http_response_header[0];*/
-    $status = "503";
+    $status = $http_response_header[0];
+    
     if($response1 == True){
     
    
