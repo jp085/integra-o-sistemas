@@ -1,33 +1,43 @@
 <?php
+
 header('Content-type: application/json');
+
 date_default_timezone_set("America/Sao_Paulo");
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $UrlExplode = explode("/", $_GET['path']);
+
 try {
     
-    $UrlExplode[1];
+    @$UrlExplode[1];
     $response1 = @file_get_contents("https://brasilapi.com.br/api/cptec/v1/cidade/$UrlExplode[1]");
     $decode1 = json_decode($response1,    true);
+    /*$status = $http_response_header[0];*/
+    $status = "503";
     if($response1 == True){
+    
+   
         foreach($decode1 as $decode){
-       
-       /* if(strtolower($decode['nome']) == strtolower($UrlExplode[1])){
-            $id = $decode['id'];
-            $response2 = file_get_contents("https://brasilapi.com.br/api/cptec/v1/clima/previsao/$id");
-            $decode2 = json_decode($response2, true);
-            echo json_encode($decode2,JSON_PRETTY_PRINT);
-            
-        }*/
 
-          if(strlen($UrlExplode[1]) >= 2){
+        if(str_contains($status, "503")){
+            $resposta503 = [
+                "erro"     => True,
+                "codigo"   => "SERVICO_EXTERNO_INDISPONIVEL",
+                "mensagem" => "Não foi possível obter dados do serviço externo. Tente novamente em alguns instantes",
+                "servico"  => "CPTEC"
+            ];
+            echo json_encode($resposta503, JSON_PRETTY_PRINT);
+            break;
+        }
+          elseif(strlen($UrlExplode[1]) >= 2){
             $id = $decode['id'];
             $response2 = file_get_contents("https://brasilapi.com.br/api/cptec/v1/clima/previsao/$id");
             $decode2 = json_decode($response2, true);
             echo json_encode($decode2,  JSON_PRETTY_PRINT);
-            break;
+            
         }
+
         elseif(strlen($UrlExplode[1]) < 2){
            $resposta400 = [
             "erro"=> true,
@@ -43,6 +53,7 @@ try {
     };
             
     }
+
     elseif($response1 == False){
         $resposta404 = [
                 "erro" => true,
@@ -52,8 +63,6 @@ try {
             ];
             echo json_encode($resposta404);
     }
-
-
     
 } catch (PDOException $e){
     echo json_encode(['error' => $e->getMessage()]);
