@@ -17,7 +17,20 @@ try {
     $decode1 = json_decode($response1,    true);
     $status = $http_response_header[0];
 
-    if(strlen($UrlExplode[2]) < 2){
+    if(empty($UrlExplode[2])){
+            http_response_code(400);
+           $resposta400 = [
+            "erro"=> true,
+            "codigo"=> "SIGLA_UF_INVALIDA",
+            "mensagem"=> "A sigla do estado deve conter exatamente 2 letras",
+            "sigla_uf_informada"=> null
+           ];
+           echo json_encode($resposta400);
+            exit;
+
+        } 
+
+    elseif(strlen($UrlExplode[2]) < 2){
             http_response_code(400);
            $resposta400 = [
             "erro"=> true,
@@ -28,14 +41,15 @@ try {
            echo json_encode($resposta400);
             exit;
 
-        } 
+    }
 
-    if($response1 !== False){
+    elseif($response1 !== False){
     
    
         foreach($decode1 as $decode){
 
         if(str_contains($status, "503")){
+            http_response_code(503);
             $resposta503 = [
                 "erro"     => True,
                 "codigo"   => "SERVICO_EXTERNO_INDISPONIVEL",
@@ -47,6 +61,7 @@ try {
         }
 
           elseif(strlen($UrlExplode[2]) == 2){
+            http_response_code(200);
             $now = new datetime();
 
             $time = array("Consultado em: " => $now-> format('Y-m-d H:i:s'));
@@ -67,6 +82,7 @@ try {
 
     elseif($response1 == False){
         if(empty($UrlExplode[2])){
+            http_response_code(404);
                 $resposta404 = [
                 "erro" => true,
                 "codigo" => "UF_NAO_ENCONTRADA",
@@ -76,6 +92,7 @@ try {
             echo json_encode($resposta404);
         }
         else{
+            http_response_code(404);
         $resposta404 = [
                 "erro" => true,
                 "codigo" => "UF_NAO_ENCONTRADA",
