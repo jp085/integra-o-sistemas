@@ -16,8 +16,21 @@ try {
     $response1 = @file_get_contents("https://brasilapi.com.br/api/ibge/municipios/v1/$UrlExplode[2]");
     $decode1 = json_decode($response1,    true);
     $status = $http_response_header[0];
-    
-    if($response1 == True){
+
+    if(strlen($UrlExplode[2]) < 2){
+            http_response_code(400);
+           $resposta400 = [
+            "erro"=> true,
+            "codigo"=> "SIGLA_UF_INVALIDA",
+            "mensagem"=> "A sigla do estado deve conter exatamente 2 letras",
+            "sigla_uf_informada"=> $UrlExplode[2]
+           ];
+           echo json_encode($resposta400);
+            exit;
+
+        } 
+
+    if($response1 !== False){
     
    
         foreach($decode1 as $decode){
@@ -46,30 +59,19 @@ try {
             echo json_encode($decode3, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             break;
         }
-
-        elseif(strlen($UrlExplode[2]) < 2){
-           $resposta400 = [
-            "erro"=> true,
-            "codigo"=> "SIGLA_UF_INVALIDA",
-            "mensagem"=> "A sigla do estado deve conter exatamente 2 letras",
-            "sigla_uf_informada"=> $UrlExplode[2]
-           ];
-           echo json_encode($resposta400);
-            break;
-
-        }   
+  
 
     };
             
     }
 
     elseif($response1 == False){
-        if($UrlExplode[2]){
+        if(empty($UrlExplode[2])){
                 $resposta404 = [
                 "erro" => true,
                 "codigo" => "UF_NAO_ENCONTRADA",
                 "mensagem" => "Estado com a sigla informada não foi encontrado",
-                "sigla_uf_informada" => $UrlExplode[2]
+                "sigla_uf_informada" => null
             ];  
             echo json_encode($resposta404);
         }
@@ -78,14 +80,14 @@ try {
                 "erro" => true,
                 "codigo" => "UF_NAO_ENCONTRADA",
                 "mensagem" => "Estado com a sigla informada não foi encontrado",
-                "sigla_uf_informada" => $UrlExplode[2]
+                "sigla_uf_informada" => null
             ];  
             echo json_encode($resposta404);
         }
         
     }
     
-} catch (PDOException $e){
+} catch (Exception $e){
     echo json_encode(['error' => $e->getMessage()]);
 
 }
