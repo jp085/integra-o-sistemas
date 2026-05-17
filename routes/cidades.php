@@ -30,7 +30,7 @@ try {
 
         } 
 
-    elseif(strlen($UrlExplode[2]) < 2){
+    elseif(strlen($UrlExplode[2]) < 2 || strlen($UrlExplode[2]) > 2){
             http_response_code(400);
            $resposta400 = [
             "erro"=> true,
@@ -109,13 +109,13 @@ try {
             ];  
             echo json_encode($resposta404);
         }
-        else{
+        elseif(strlen($UrlExplode[2]) == 2){
             http_response_code(404);
         $resposta404 = [
                 "erro" => true,
                 "codigo" => "UF_NAO_ENCONTRADA",
                 "mensagem" => "Estado com a sigla informada não foi encontrado",
-                "sigla_uf_informada" => null
+                "sigla_uf_informada" => $UrlExplode[2]
             ];  
             echo json_encode($resposta404);
         }
