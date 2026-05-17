@@ -61,17 +61,35 @@ try {
         }
 
           elseif(strlen($UrlExplode[2]) == 2){
+            if ($limite > 100){
+                $limite = 100;
+            }
+
             http_response_code(200);
             $now = new datetime();
 
             $time = array("Consultado em: " => $now-> format('Y-m-d H:i:s'));
 
-            $uf = array("UF: " => $UrlExplode[2]);
+            $uf = $UrlExplode[2];
             $qtd = array("Quantidade retornada: " => $limite);
             $decode1 = json_decode($response1, true);
-            $decode2arraylimit = array_slice($decode1, 0, $limite);
-            $decode3 = array_merge($uf, $qtd,$decode2arraylimit, $time);
-            echo json_encode($decode3, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            $cidades = [];
+
+            foreach($decode1 as $decode){
+                $cidades[] = [
+                "nome" => $decode["nome"]
+                ];
+            }
+            $cidades = array_slice($cidades,0,$limite);
+
+            $resposta = 
+            ["uf" => $uf,
+             "Quantidade retornada" => $limite,
+             "cidades" => $cidades,
+             "consultado em" => $time   
+            ];
+
+            echo json_encode($resposta, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             break;
         }
   
