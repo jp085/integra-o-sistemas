@@ -8,6 +8,7 @@ date_default_timezone_set("America/Sao_Paulo");
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $UrlExplode = explode("/", $_GET['path']);
+$limite = $_GET['limite'] ?? '10';
 
 try {
     
@@ -34,8 +35,9 @@ try {
 
           elseif(strlen($UrlExplode[2]) == 2){
             $decode2 = json_decode($response1, true);
-            echo json_encode($decode2, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-            
+            $decode2arraylimit = array_slice($decode2, 0, $limite);
+            echo json_encode($decode2arraylimit, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            break;
         }
 
         elseif(strlen($UrlExplode[2]) < 2){
