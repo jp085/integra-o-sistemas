@@ -17,11 +17,12 @@ switch($UrlExplode[1]){
     case 'cidades':
         require 'routes/cidades.php';
         break;
+
+    case 'health':
+        require 'routes/health.php';
+        break;
+    
 }
-        
-
-
-
 
 
 ?>
