@@ -34,9 +34,16 @@ try {
         }
 
           elseif(strlen($UrlExplode[2]) == 2){
-            $decode2 = json_decode($response1, true);
-            $decode2arraylimit = array_slice($decode2, 0, $limite);
-            echo json_encode($decode2arraylimit, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            $now = new datetime();
+
+            $time = array("Consultado em: " => $now-> format('Y-m-d H:i:s'));
+
+            $uf = array("UF: " => $UrlExplode[2]);
+            $qtd = array("Quantidade retornada: " => $limite);
+            $decode1 = json_decode($response1, true);
+            $decode2arraylimit = array_slice($decode1, 0, $limite);
+            $decode3 = array_merge($uf, $qtd,$decode2arraylimit, $time);
+            echo json_encode($decode3, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             break;
         }
 
