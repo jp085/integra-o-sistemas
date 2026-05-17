@@ -79,6 +79,7 @@ try {
             exit;
         }
         else{
+            http_response_code(404);    
         $resposta404 = [
                 "erro" => true,
                 "codigo" => "CIDADE_NAO_ENCONTRADA",
