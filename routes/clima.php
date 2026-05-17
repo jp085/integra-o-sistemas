@@ -73,7 +73,7 @@ try {
                 "erro" => true,
                 "codigo" => "CIDADE_NAO_ENCONTRADA",
                 "mensagem" => "Nenhuma cidade encontrada com o nome informado",
-                "nome_informado" => $UrlExplode[2]
+                "nome_informado" => "CidadeInexistente"
             ];  
             echo json_encode($resposta404);
             exit;
@@ -84,7 +84,7 @@ try {
                 "erro" => true,
                 "codigo" => "CIDADE_NAO_ENCONTRADA",
                 "mensagem" => "Nenhuma cidade encontrada com o nome informado",
-                "nome_informado" => $UrlExplode[2]
+                "nome_informado" => "CidadeInexistente"
             ];  
             echo json_encode($resposta404);
             exit;
