@@ -42,10 +42,25 @@ try {
         }
 
           elseif(strlen($UrlExplode[2]) >= 2){
+            $now = new datetime();
+
+            $time = $now-> format('Y-m-d H:i:s');
             $id = $decode['id'];
             $response2 = file_get_contents("https://brasilapi.com.br/api/cptec/v1/clima/previsao/$id");
             $decode2 = json_decode($response2, true);
-            echo json_encode($decode2, JSON_UNESCAPED_UNICODE);
+        
+            $resposta = [
+                "nome"   => $decode2['cidade'],
+                "estado" => $decode2['estado'],
+                "clima" => [
+                "temperatura_min" => $decode2["clima"][0]['min'],
+                "temperatura_max" => $decode2['clima'][0]['max'],
+                "condicao"        => $decode2['clima'][0]['condicao_desc'],
+                "unidades" => ["temperatura" => "°C"]],
+                "consultado em: " => $time
+            ];
+            
+            echo json_encode($resposta, JSON_UNESCAPED_UNICODE);
             exit;
         }
 
