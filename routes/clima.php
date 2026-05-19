@@ -60,8 +60,9 @@ try {
                 "consultado em: " => $time
             ];
             
-            echo json_encode($resposta, JSON_UNESCAPED_UNICODE);
-            exit;
+            echo json_encode($resposta, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            //exit;
+            //Solicitação do professor passar mais de uma resposta 
         }
 
         elseif(strlen($UrlExplode[2]) < 2){
@@ -88,7 +89,7 @@ try {
                 "erro" => true,
                 "codigo" => "CIDADE_NAO_ENCONTRADA",
                 "mensagem" => "Nenhuma cidade encontrada com o nome informado",
-                "nome_informado" => "CidadeInexistente"
+                "nome_informado" => $UrlExplode[2]
             ];  
             echo json_encode($resposta404);
             exit;
@@ -99,10 +100,12 @@ try {
                 "erro" => true,
                 "codigo" => "CIDADE_NAO_ENCONTRADA",
                 "mensagem" => "Nenhuma cidade encontrada com o nome informado",
-                "nome_informado" => "CidadeInexistente"
+                "nome_informado" => $UrlExplode[2]
             ];  
             echo json_encode($resposta404);
             exit;
+            // adicionar a cidade no lugar de "cidadeInexistente
+            //ok!!!
         }
         
     }
