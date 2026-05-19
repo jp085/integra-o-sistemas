@@ -64,11 +64,11 @@ try {
             if ($limite > 100){
                 $limite = 100;
             }
-
+            //Tratar limite de retorno quando for zero para o default
             http_response_code(200);
             $now = new datetime();
 
-            $time = array("Consultado em: " => $now-> format('Y-m-d H:i:s'));
+            $time = array("Consultado em: " => $now-> format('Y-m-d H:m:s'));
 
             $uf = $UrlExplode[2];
             $qtd = array("Quantidade retornada: " => $limite);
