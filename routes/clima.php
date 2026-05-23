@@ -8,12 +8,16 @@ $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $UrlExplode = explode("/", $_GET['path']);
 
+if(empty($UrlExplode[2])){
+        $UrlExplode[2] = ' ';
+}
+
 try {
     
     @$UrlExplode[2];
     $response1 = @file_get_contents("https://brasilapi.com.br/api/cptec/v1/cidade/$UrlExplode[2]");
     $decode1 = json_decode($response1,    true);
-    $status = $http_response_header[0];
+    $status = http_response_code();
     
     if(empty($UrlExplode[2])){
         foreach($decode1 as $decode){
@@ -60,9 +64,8 @@ try {
                 "consultado em: " => $time
             ];
             
-            echo json_encode($resposta, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-            //exit;
-            //Solicitação do professor passar mais de uma resposta 
+            echo json_encode($resposta, JSON_UNESCAPED_UNICODE);
+            exit;
         }
 
         elseif(strlen($UrlExplode[2]) < 2){
@@ -89,7 +92,7 @@ try {
                 "erro" => true,
                 "codigo" => "CIDADE_NAO_ENCONTRADA",
                 "mensagem" => "Nenhuma cidade encontrada com o nome informado",
-                "nome_informado" => $UrlExplode[2]
+                "nome_informado" => "CidadeInexistente"
             ];  
             echo json_encode($resposta404);
             exit;
@@ -100,12 +103,10 @@ try {
                 "erro" => true,
                 "codigo" => "CIDADE_NAO_ENCONTRADA",
                 "mensagem" => "Nenhuma cidade encontrada com o nome informado",
-                "nome_informado" => $UrlExplode[2]
+                "nome_informado" => "CidadeInexistente"
             ];  
             echo json_encode($resposta404);
             exit;
-            // adicionar a cidade no lugar de "cidadeInexistente
-            //ok!!!
         }
         
     }
