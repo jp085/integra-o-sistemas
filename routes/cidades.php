@@ -15,7 +15,7 @@ try {
     @$UrlExplode[2];
     $response1 = @file_get_contents("https://brasilapi.com.br/api/ibge/municipios/v1/$UrlExplode[2]");
     $decode1 = json_decode($response1,    true);
-    $status = $http_response_header[0];
+    $status = http_response_code();
 
     if(empty($UrlExplode[2])){
             http_response_code(400);
@@ -64,11 +64,11 @@ try {
             if ($limite > 100){
                 $limite = 100;
             }
-            //Tratar limite de retorno quando for zero para o default
+
             http_response_code(200);
             $now = new datetime();
 
-            $time = array("Consultado em: " => $now-> format('Y-m-d H:m:s'));
+            $time = array("Consultado em: " => $now-> format('Y-m-d H:i:s'));
 
             $uf = $UrlExplode[2];
             $qtd = array("Quantidade retornada: " => $limite);
