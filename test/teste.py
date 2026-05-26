@@ -4,14 +4,14 @@ import urllib.request
 import urllib.error
 import urllib.parse
 
-BASE_URL = "http://localhost:3000/api/v1/clima"
+BASE_URL = "http://localhost:3000/api/v1/cidades"
 
 
-class TestWeatherAPI(unittest.TestCase):
+class TestCidadesAPI(unittest.TestCase):
 
-    def _get(self, cidade: str):
-        """Faz GET em /api/v1/clima/<cidade> e devolve (status_code, body_dict)."""
-        url = f"{BASE_URL}/{urllib.parse.quote(cidade)}"
+    def _get(self, uf: str):
+        """Faz GET em /api/v1/cidades/<uf> e devolve (status_code, body_dict)."""
+        url = f"{BASE_URL}/{urllib.parse.quote(uf)}"
         try:
             with urllib.request.urlopen(url, timeout=10) as r:
                 return r.status, json.loads(r.read().decode())
@@ -19,31 +19,32 @@ class TestWeatherAPI(unittest.TestCase):
             return e.code, json.loads(e.read().decode())
 
     # ──────────────────────────────────────────────────────────────────────────
-    # Teste 1 – Cidade válida → retorna previsão (HTTP 200)
+    # Teste 1 – UF válida → retorna lista de cidades (HTTP 200)
     # ──────────────────────────────────────────────────────────────────────────
-    def test_cidade_valida_retorna_previsao(self):
-        status, body = self._get("maracanau")
+    def test_uf_valida_retorna_cidades(self):
+        status, body = self._get("ce")
 
         self.assertEqual(200, status)
-        self.assertIn("nome",   body)
-        self.assertIn("estado", body)
-        self.assertIn("clima",  body)
-        self.assertIn("temperatura_min",  body["clima"])
-        self.assertIn("temperatura_max",  body["clima"])
-        self.assertIn("condicao",         body["clima"])
-        self.assertEqual("°C", body["clima"]["unidades"]["temperatura"])
-        self.assertIn("consultado em: ",  body)
+        self.assertEqual("ce",          body["uf"])
+        self.assertIn("cidades",        body)
+        self.assertIn("consultado em",  body)
+
+        # Cada item da lista deve ter o campo "nome"
+        self.assertTrue(len(body["cidades"]) > 0, "Lista de cidades não pode ser vazia")
+        for cidade in body["cidades"]:
+            self.assertIn("nome", cidade)
 
     # ──────────────────────────────────────────────────────────────────────────
-    # Teste 2 – Nome com menos de 2 caracteres → erro 400
+    # Teste 2 – UF inexistente → erro 404
     # ──────────────────────────────────────────────────────────────────────────
-    def test_nome_curto_retorna_erro_400(self):
-        status, body = self._get("X")
+    def test_uf_inexistente_retorna_erro_404(self):
+        status, body = self._get("xx")  # sigla que não existe
 
-        self.assertEqual(400, status)
+        self.assertEqual(404, status)
         self.assertTrue(body["erro"])
-        self.assertEqual("NOME_INVALIDO", body["codigo"])
-        self.assertIn("2 caracteres",     body["mensagem"])
+        self.assertEqual("UF_NAO_ENCONTRADA",                      body["codigo"])
+        self.assertEqual("Estado com a sigla informada não foi encontrado", body["mensagem"])
+        self.assertEqual("xx",                                     body["sigla_uf_informada"])
 
 
 if __name__ == "__main__":
