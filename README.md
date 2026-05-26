@@ -4,6 +4,7 @@ Olá, o seguinte trabalho tem o objetivo de integrar API'S públicas, as quais t
 Stack utilizada:
 PHP 8.2.12
 XAMPP compatível PHP 8.2.12
+Composer 2.9.8
 
 Configuração: 
 Extrair arquivos da pasta src para a pasta htdocs do Xampp e startar servidor na porta adequada.
