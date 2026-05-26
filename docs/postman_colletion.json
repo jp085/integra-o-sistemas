@@ -1,7 +1,7 @@
 {
-	"id": "20001a45-b108-42b2-b914-9b6e055995aa",
+	"id": "b8e88def-663e-454e-adae-e9e7d4cd0cc9",
 	"name": "My Collection",
-	"timestamp": "2026-05-26T01:46:00.128Z",
+	"timestamp": "2026-05-26T02:02:49.117Z",
 	"collection_id": "54925904-2dfd4f39-90b0-481a-8189-8532ffcfb26e",
 	"folder_id": 0,
 	"environment_id": "0",
@@ -9,14 +9,14 @@
 	"delay": 0,
 	"persist": true,
 	"status": "finished",
-	"startedAt": "2026-05-26T01:45:51.847Z",
+	"startedAt": "2026-05-26T02:02:41.142Z",
 	"totalFail": 0,
 	"results": [
 		{
 			"id": "4b04a5bb-3ef3-487e-97ad-6cb4a109b360",
 			"name": "Endpoint inicial 1",
 			"url": "http://localhost/api/",
-			"time": 10,
+			"time": 7,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -24,7 +24,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				10
+				7
 			],
 			"allTests": [
 				{}
@@ -34,7 +34,7 @@
 			"id": "ccf7c261-77df-4201-bf2e-0cf855c0a2ce",
 			"name": "Endpoint inicial 2",
 			"url": "http://localhost/api/v1/",
-			"time": 6,
+			"time": 4,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -42,7 +42,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				6
+				4
 			],
 			"allTests": [
 				{}
@@ -52,7 +52,7 @@
 			"id": "1fddeb93-31f6-4d07-8803-475614af8ff2",
 			"name": "E. Clima",
 			"url": "http://localhost/api/v1/clima",
-			"time": 1328,
+			"time": 1046,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -60,7 +60,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				1328
+				1046
 			],
 			"allTests": [
 				{}
@@ -70,7 +70,7 @@
 			"id": "c8941f0b-cdf8-4b17-997e-314c0e82ef51",
 			"name": "E. Clima Fortaleza",
 			"url": "http://localhost/api/v1/clima/fortaleza",
-			"time": 1125,
+			"time": 1132,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -78,7 +78,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				1125
+				1132
 			],
 			"allTests": [
 				{}
@@ -88,7 +88,7 @@
 			"id": "0189e1fc-c0a2-4296-8800-d4e8f38b463e",
 			"name": "E. Clima F",
 			"url": "http://localhost/api/v1/clima/f",
-			"time": 603,
+			"time": 538,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -96,7 +96,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				603
+				538
 			],
 			"allTests": [
 				{}
@@ -106,7 +106,7 @@
 			"id": "43b44a85-fae3-4770-9a6d-a18492b7a0b9",
 			"name": "E. Clima xxxxxxxx",
 			"url": "http://localhost/api/v1/clima/xxxxxxxx",
-			"time": 671,
+			"time": 615,
 			"responseCode": {
 				"code": 404,
 				"name": "Not Found"
@@ -114,7 +114,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				671
+				615
 			],
 			"allTests": [
 				{}
@@ -124,7 +124,7 @@
 			"id": "c4ff8a59-e5bf-4892-a353-602ec9b90bb0",
 			"name": "E. health",
 			"url": "http://localhost/api/v1/health",
-			"time": 5,
+			"time": 3,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -132,7 +132,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				5
+				3
 			],
 			"allTests": [
 				{}
@@ -142,7 +142,7 @@
 			"id": "6b91332f-62eb-4566-9379-ca6d9924030e",
 			"name": "E. Cidades",
 			"url": "http://localhost/api/v1/cidades",
-			"time": 1145,
+			"time": 1021,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -150,7 +150,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				1145
+				1021
 			],
 			"allTests": [
 				{}
@@ -160,7 +160,7 @@
 			"id": "98ed993d-a287-4133-8cbe-109221d38f56",
 			"name": "E. Cidades CE",
 			"url": "http://localhost/api/v1/cidades/ce",
-			"time": 646,
+			"time": 529,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -168,7 +168,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				646
+				529
 			],
 			"allTests": [
 				{}
@@ -178,7 +178,7 @@
 			"id": "0757962e-5a8e-4d01-9639-349a28e8d4ff",
 			"name": "E. Cidades C",
 			"url": "http://localhost/api/v1/cidades/c",
-			"time": 836,
+			"time": 769,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -186,7 +186,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				836
+				769
 			],
 			"allTests": [
 				{}
@@ -196,7 +196,7 @@
 			"id": "324a8720-b5f8-47be-83c9-830ceefde8a0",
 			"name": "E. Cidades CEA",
 			"url": "http://localhost/api/v1/cidades/cea",
-			"time": 775,
+			"time": 800,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -204,7 +204,25 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				775
+				800
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "24adf99e-be48-45d4-834c-2a258db632ca",
+			"name": "E Cidades CE?limite=100",
+			"url": "http://localhost/api/v1/cidades/ce?limite=100",
+			"time": 537,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				537
 			],
 			"allTests": [
 				{}
@@ -212,7 +230,7 @@
 		}
 	],
 	"count": 1,
-	"totalTime": 7150,
+	"totalTime": 7001,
 	"collection": {
 		"requests": [
 			{
@@ -257,6 +275,10 @@
 			},
 			{
 				"id": "324a8720-b5f8-47be-83c9-830ceefde8a0",
+				"method": "GET"
+			},
+			{
+				"id": "24adf99e-be48-45d4-834c-2a258db632ca",
 				"method": "GET"
 			}
 		]
