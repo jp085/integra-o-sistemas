@@ -7,7 +7,10 @@ XAMPP compatível PHP 8.2.12
 Composer 2.9.8
 
 Configuração: 
-Extrair arquivos da pasta src para a pasta htdocs do Xampp e startar servidor na porta adequada. (Alterar porta no httpd.conf -> linha: ServerName localhost:3000)
+Extrair arquivos da pasta src para a pasta htdocs do Xampp e startar servidor na porta adequada. (Alterar porta no httpd.conf 
+-> linha: ServerName localhost:3000 
+          #Listen 12.34.56.78:3000
+          Listen 3000)
 
 segue exemplo de execução:
 I) Startar servidor Xampp
